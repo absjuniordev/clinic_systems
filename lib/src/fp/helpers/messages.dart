@@ -11,7 +11,7 @@ final class Messages {
     );
   }
 
-  static void showInfor(String message, BuildContext context) {
+  static void showInfo(String message, BuildContext context) {
     showTopSnackBar(
       Overlay.of(context),
       CustomSnackBar.info(message: message),
@@ -31,7 +31,7 @@ mixin MessageStateMixin {
   String? get errorMessage => _errorMessage();
 
   final Signal<String?> _infoMessage = signal(null);
-  String? get inforMessage => _errorMessage();
+  String? get infoMessage => _errorMessage();
 
   final Signal<String?> _successMessage = signal(null);
   String? get successMessage => _errorMessage();
@@ -64,4 +64,17 @@ mixin MessageStateMixin {
   }
 }
 
-mixin MessageViewMixin<T extends StatefulWidget> on State<T> {}
+mixin MessageViewMixin<T extends StatefulWidget> on State<T> {
+  void messageListener(MessageStateMixin state) {
+    effect(() {
+      switch (state) {
+        case MessageStateMixin(:final errorMessage?):
+          Messages.showError(errorMessage, context);
+        case MessageStateMixin(:final infoMessage?):
+          Messages.showInfo(infoMessage, context);
+        case MessageStateMixin(:final successMessage?):
+          Messages.showSuccess(successMessage, context);
+      }
+    });
+  }
+}
