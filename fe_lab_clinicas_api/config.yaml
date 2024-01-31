@@ -14,4 +14,8 @@ auth:
   jwtExpire: 3600
   urlSkip:
     - /images/:
-        method: get
+         method: get
+    - /users:    
+         method: post
+    - /adm_users:
+         method: post    
