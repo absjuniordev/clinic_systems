@@ -11,14 +11,14 @@ class LabClinicasCoreConfig extends StatelessWidget {
     this.binding,
     this.pages,
     this.pagesBuilder,
-    this.modulos,
+    this.modules,
     required this.title,
   }) : super(key: key);
 
   final ApplicationBindings? binding;
   final List<FlutterGetItPageRouter>? pages;
   final List<FlutterGetItPageBuilder>? pagesBuilder;
-  final List<FlutterGetItModule>? modulos;
+  final List<FlutterGetItModule>? modules;
   final String title;
 
   @override
@@ -26,6 +26,7 @@ class LabClinicasCoreConfig extends StatelessWidget {
     return FlutterGetIt(
       debugMode: kDebugMode,
       bindings: binding,
+      modules: modules,
       pages: [...pages ?? [], ...pagesBuilder ?? []],
       builder: (context, routes, flutterGetItNavObserver) {
         return AsyncStateBuilder(
