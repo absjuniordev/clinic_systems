@@ -1,4 +1,5 @@
 import 'package:fe_lab_clinicas_core/fe_lab_clinicas_core.dart';
+import 'package:fe_lab_clinicas_self_service/src/pages/splash_page/splash_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_getit/flutter_getit.dart';
 
@@ -14,8 +15,7 @@ class LabClinicasSelfServiceApp extends StatelessWidget {
     return LabClinicasCoreConfig(
       title: "Lab Clinicas Auto Atendimento",
       pagesBuilder: [
-        FlutterGetItPageBuilder(
-            page: (_) => const MyHomePage(title: "Start Teste"), path: '/')
+        FlutterGetItPageBuilder(page: (_) => const SplashPage(), path: '/'),
       ],
     );
   }
