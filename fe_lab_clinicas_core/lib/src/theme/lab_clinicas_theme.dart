@@ -47,4 +47,12 @@ final class LabClinicasTheme {
     ),
   );
   static final darkTheme = lightThem;
+  static const titleStyle =
+      TextStyle(color: blueColor, fontSize: 32, fontWeight: FontWeight.w900);
+
+  static const titleSmallStyle =
+      TextStyle(color: blueColor, fontSize: 24, fontWeight: FontWeight.w900);
+
+  static const subTitleSmallStyle =
+      TextStyle(color: blueColor, fontSize: 18, fontWeight: FontWeight.w500);
 }
