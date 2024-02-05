@@ -23,7 +23,7 @@ class LabClinicasSelfServiceApp extends StatelessWidget {
           path: '/',
         ),
       ],
-      modulos: [
+      modules: [
         AuthModule(),
       ],
     );
