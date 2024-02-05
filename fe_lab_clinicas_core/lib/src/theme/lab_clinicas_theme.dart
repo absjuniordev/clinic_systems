@@ -33,4 +33,5 @@ final class LabClinicasTheme {
       ),
     ),
   );
+  static final darkTheme = lightThem;
 }
