@@ -6,6 +6,7 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final sizeOf = MediaQuery.sizeOf(context);
     return Scaffold(
       appBar: LabClinicasAppBar(
         actions: [
@@ -26,7 +27,41 @@ class HomePage extends StatelessWidget {
           ),
         ],
       ),
-      body: Container(),
+      body: Align(
+        alignment: Alignment.topCenter,
+        child: Container(
+          margin: const EdgeInsets.only(top: 112),
+          padding: const EdgeInsets.all(40),
+          width: sizeOf.width * .8,
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(16),
+            border: Border.all(
+              color: LabClinicasTheme.orangeColor,
+            ),
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const Text(
+                "Bem Vindo",
+                style: LabClinicasTheme.titleStyle,
+              ),
+              const SizedBox(
+                height: 32,
+              ),
+              SizedBox(
+                width: sizeOf.width * .8,
+                height: 48,
+                child: ElevatedButton(
+                  onPressed: () {},
+                  child: const Text('INICIAR TERMINAL'),
+                ),
+              )
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
