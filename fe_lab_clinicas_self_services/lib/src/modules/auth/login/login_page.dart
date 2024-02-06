@@ -12,11 +12,21 @@ class LoginPage extends StatefulWidget {
   State<LoginPage> createState() => _LoginPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _LoginPageState extends State<LoginPage> with MessageViewMixin {
   final emailEC = TextEditingController();
   final passwordEC = TextEditingController();
   final formKey = GlobalKey<FormState>();
   final controller = Injector.get<LoginController>();
+
+  @override
+  void initState() {
+    messageListener(controller);
+    effect(() => {
+          if (controller.logged)
+            {Navigator.of(context).pushReplacementNamed('/home')}
+        });
+    super.initState();
+  }
 
   @override
   void dispose() {
@@ -101,7 +111,9 @@ class _LoginPageState extends State<LoginPage> {
                           final valid =
                               formKey.currentState?.validate() ?? false;
 
-                          if (valid) {}
+                          if (valid) {
+                            controller.login(emailEC.text, passwordEC.text);
+                          }
                         },
                         child: const Text("ENTRAR"),
                       ),

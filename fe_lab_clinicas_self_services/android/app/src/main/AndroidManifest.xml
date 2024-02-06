@@ -2,6 +2,7 @@
     <application
         android:label="fe_lab_clinicas_self_service"
         android:name="${applicationName}"
+        android:enableOnBackInvokedCallback="true"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
