@@ -16,6 +16,11 @@
             "id": "49ff5260-0ebc-1e8b-bae2-f1b7a18834a3",
             "email": "terminal10@gmail.com",
             "password": "123123"
+        },
+        {
+            "id": "80ce0c70-effe-1e9c-b40c-9782a992e993",
+            "email": "atm@gmail.com",
+            "password": "123123"
         }
     ],
     "attendantDeskAssignment": [],
