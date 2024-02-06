@@ -2,6 +2,7 @@ import 'package:fe_lab_clinicas_core/fe_lab_clinicas_core.dart';
 import 'package:fe_lab_clinicas_self_service/src/modules/self_service/self_service_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_getit/flutter_getit.dart';
+import 'package:signals_flutter/signals_flutter.dart';
 
 class SelfServicePage extends StatefulWidget {
   const SelfServicePage({super.key});
@@ -17,6 +18,33 @@ class _SelfServicePageState extends State<SelfServicePage>
   @override
   void initState() {
     messageListener(controller);
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      controller.startProcess();
+
+      effect(() {
+        var baseRoute = '/self-service/';
+        final step = controller.step;
+
+        switch (step) {
+          case FormSteps.nome:
+            return;
+          case FormSteps.whoIAm:
+            baseRoute += 'whoIAm';
+          case FormSteps.findPatient:
+            baseRoute += 'find-patient';
+          case FormSteps.patient:
+            baseRoute += 'patient';
+          case FormSteps.documents:
+            baseRoute += 'documents';
+          case FormSteps.done:
+            baseRoute += 'done';
+          case FormSteps.restart:
+            return;
+        }
+
+        Navigator.of(context).pushNamed(baseRoute);
+      });
+    });
     super.initState();
   }
 
