@@ -15,19 +15,12 @@ class UserRepositoryImpl implements UserRepository {
 
   @override
   Future<Either<AuthException, String>> login(
-      String email, String passowrd) async {
+      String email, String password) async {
     try {
-      final response = await restClient.post('/auth', data: {
-        'email': email,
-        'passowrd': passowrd,
-        'admin': true,
-      });
-
-      print(response);
       final Response(data: {'access_token': accessToken}) =
           await restClient.unAuth.post('/auth', data: {
         'email': email,
-        'passowrd': passowrd,
+        'password': password,
         'admin': true,
       });
       return Right(accessToken);
