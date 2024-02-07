@@ -15,4 +15,20 @@ mixin PatientFormController on State<PatientPage> {
   final districtEC = TextEditingController();
   final guardianEC = TextEditingController();
   final guardianIdentificationNumberEC = TextEditingController();
+
+  void disposeForm() {
+    nameEC.dispose();
+    emailEC.dispose();
+    phoneEC.dispose();
+    documentEC.dispose();
+    cepEC.dispose();
+    streetEC.dispose();
+    numberEC.dispose();
+    complementEC.dispose();
+    stateEC.dispose();
+    cityEC.dispose();
+    districtEC.dispose();
+    guardianEC.dispose();
+    guardianIdentificationNumberEC.dispose();
+  }
 }
