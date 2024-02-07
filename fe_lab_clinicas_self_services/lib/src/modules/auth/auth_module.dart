@@ -1,6 +1,6 @@
 import 'package:fe_lab_clinicas_self_service/src/modules/auth/login/login_router.dart';
-import 'package:fe_lab_clinicas_self_service/src/repository/user_repository.dart';
-import 'package:fe_lab_clinicas_self_service/src/repository/user_repository_impl.dart';
+import 'package:fe_lab_clinicas_self_service/src/repository/user/user_repository.dart';
+import 'package:fe_lab_clinicas_self_service/src/repository/user/user_repository_impl.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_getit/flutter_getit.dart';
 
