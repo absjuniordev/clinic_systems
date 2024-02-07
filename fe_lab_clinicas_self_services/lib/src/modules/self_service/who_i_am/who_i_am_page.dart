@@ -39,6 +39,7 @@ class _WhoIAmPageState extends State<WhoIAmPage> {
           appBar: LabClinicasAppBar(
             actions: [
               PopupMenuButton(
+                child: const IconPopupMenuWidget(),
                 itemBuilder: (context) {
                   return [
                     const PopupMenuItem(
