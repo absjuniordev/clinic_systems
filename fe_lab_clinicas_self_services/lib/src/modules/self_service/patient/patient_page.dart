@@ -21,13 +21,13 @@ class _PatientPageState extends State<PatientPage> with PatientFormController {
   final selfServiceController = Injector.get<SelfServiceController>();
 
   late bool patientFound;
-  late bool formEdit;
+  late bool enableForm;
   @override
   void initState() {
     final SelfServiceModel(:patient) = selfServiceController.model;
 
     patientFound = patient != null;
-    formEdit = !patientFound;
+    enableForm = !patientFound;
 
     initializeForm(patient);
     super.initState();
@@ -42,249 +42,310 @@ class _PatientPageState extends State<PatientPage> with PatientFormController {
   @override
   Widget build(BuildContext context) {
     final sizeOf = MediaQuery.sizeOf(context);
-    return Scaffold(
-      appBar: LabClinicasSelfServiceAppBar(),
-      body: Align(
-        alignment: Alignment.topCenter,
-        child: SingleChildScrollView(
-          child: Container(
-            margin: const EdgeInsets.only(top: 18),
-            padding: const EdgeInsets.all(32),
-            width: sizeOf.width * .8,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(16),
-              border: Border.all(color: LabClinicasTheme.orangeColor),
-            ),
-            child: Form(
-              key: formKey,
-              child: Column(
-                children: [
-                  Image.asset('assets/images/check_icon.png'),
-                  const SizedBox(
-                    height: 24,
-                  ),
-                  const Text(
-                    "Cadastro encontrado",
-                    style: LabClinicasTheme.titleSmallStyle,
-                  ),
-                  const SizedBox(
-                    height: 32,
-                  ),
-                  const Text(
-                    "Confirme os dados do seu cadastro",
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500,
-                      color: LabClinicasTheme.blueColor,
+
+    return PopScope(
+      // canPop: false,
+      onPopInvoked: (didPop) {},
+      child: Scaffold(
+        appBar: LabClinicasSelfServiceAppBar(),
+        body: Align(
+          alignment: Alignment.topCenter,
+          child: SingleChildScrollView(
+            child: Container(
+              margin: const EdgeInsets.only(top: 18),
+              padding: const EdgeInsets.all(32),
+              width: sizeOf.width * .8,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(16),
+                border: Border.all(color: LabClinicasTheme.orangeColor),
+              ),
+              child: Form(
+                key: formKey,
+                child: Column(
+                  children: [
+                    Visibility(
+                      visible: patientFound,
+                      replacement: Image.asset("assets/images/lupa_icon.png"),
+                      child: Image.asset('assets/images/check_icon.png'),
                     ),
-                  ),
-                  const SizedBox(
-                    height: 24,
-                  ),
-                  TextFormField(
-                    controller: nameEC,
-                    validator: Validatorless.required("Nome obrigatório"),
-                    decoration: const InputDecoration(
-                      label: Text("Nome do Paciente"),
+                    const SizedBox(
+                      height: 24,
                     ),
-                  ),
-                  const SizedBox(
-                    height: 16,
-                  ),
-                  TextFormField(
-                    controller: emailEC,
-                    validator: Validatorless.multiple([
-                      Validatorless.email("Email inavlido"),
-                      Validatorless.required("Email"),
-                    ]),
-                    decoration: const InputDecoration(
-                      label: Text('Emal'),
+                    Visibility(
+                      visible: patientFound,
+                      replacement: const Text(
+                        "Cadastro Não encontrado",
+                        style: LabClinicasTheme.titleSmallStyle,
+                      ),
+                      child: const Text(
+                        "Cadastro encontrado",
+                        style: LabClinicasTheme.titleSmallStyle,
+                      ),
                     ),
-                  ),
-                  const SizedBox(
-                    height: 16,
-                  ),
-                  TextFormField(
-                    controller: phoneEC,
-                    validator: Validatorless.required("telefone obrigatório"),
-                    inputFormatters: [
-                      TelefoneInputFormatter(),
-                      FilteringTextInputFormatter.digitsOnly,
-                    ],
-                    decoration: const InputDecoration(
-                      label: Text('Telefono de contato'),
+                    const SizedBox(
+                      height: 32,
                     ),
-                  ),
-                  const SizedBox(
-                    height: 16,
-                  ),
-                  TextFormField(
-                    validator: Validatorless.required("CPF obrigatório"),
-                    inputFormatters: [
-                      FilteringTextInputFormatter.digitsOnly,
-                      CpfInputFormatter()
-                    ],
-                    controller: documentEC,
-                    decoration: const InputDecoration(
-                      label: Text('Digite o seu CPF'),
+                    Visibility(
+                      visible: patientFound,
+                      replacement: const Text(
+                        "Preencha o formulario abaixo para fazer o cadastro",
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500,
+                          color: LabClinicasTheme.blueColor,
+                        ),
+                      ),
+                      child: const Text(
+                        "Confirme os dados do seu cadastro",
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500,
+                          color: LabClinicasTheme.blueColor,
+                        ),
+                      ),
                     ),
-                  ),
-                  const SizedBox(
-                    height: 16,
-                  ),
-                  TextFormField(
-                    controller: cepEC,
-                    inputFormatters: [
-                      FilteringTextInputFormatter.digitsOnly,
-                      CepInputFormatter()
-                    ],
-                    validator: Validatorless.required("CEP obrigatório"),
-                    decoration: const InputDecoration(
-                      label: Text('CEP'),
+                    const SizedBox(
+                      height: 24,
                     ),
-                  ),
-                  const SizedBox(
-                    height: 16,
-                  ),
-                  Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Flexible(
-                        flex: 3,
-                        child: TextFormField(
-                          controller: streetEC,
-                          validator:
-                              Validatorless.required("Endereço obrigatório"),
-                          decoration: const InputDecoration(
-                            label: Text('Endereço'),
+                    TextFormField(
+                      readOnly: !enableForm,
+                      controller: nameEC,
+                      validator: Validatorless.required("Nome obrigatório"),
+                      decoration: const InputDecoration(
+                        label: Text("Nome do Paciente"),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    TextFormField(
+                      readOnly: !enableForm,
+                      controller: emailEC,
+                      validator: Validatorless.multiple([
+                        Validatorless.email("Email inavlido"),
+                        Validatorless.required("Email"),
+                      ]),
+                      decoration: const InputDecoration(
+                        label: Text('Emal'),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    TextFormField(
+                      readOnly: !enableForm,
+                      controller: phoneEC,
+                      validator: Validatorless.required("telefone obrigatório"),
+                      inputFormatters: [
+                        TelefoneInputFormatter(),
+                        FilteringTextInputFormatter.digitsOnly,
+                      ],
+                      decoration: const InputDecoration(
+                        label: Text('Telefono de contato'),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    TextFormField(
+                      readOnly: !enableForm,
+                      validator: Validatorless.required("CPF obrigatório"),
+                      inputFormatters: [
+                        FilteringTextInputFormatter.digitsOnly,
+                        CpfInputFormatter()
+                      ],
+                      controller: documentEC,
+                      decoration: const InputDecoration(
+                        label: Text('Digite o seu CPF'),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    TextFormField(
+                      readOnly: !enableForm,
+                      controller: cepEC,
+                      inputFormatters: [
+                        FilteringTextInputFormatter.digitsOnly,
+                        CepInputFormatter()
+                      ],
+                      validator: Validatorless.required("CEP obrigatório"),
+                      decoration: const InputDecoration(
+                        label: Text('CEP'),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Flexible(
+                          flex: 3,
+                          child: TextFormField(
+                            readOnly: !enableForm,
+                            controller: streetEC,
+                            validator:
+                                Validatorless.required("Endereço obrigatório"),
+                            decoration: const InputDecoration(
+                              label: Text('Endereço'),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(
+                          width: 16,
+                        ),
+                        Flexible(
+                          child: TextFormField(
+                            readOnly: !enableForm,
+                            validator:
+                                Validatorless.required("Numero obrigatório"),
+                            controller: numberEC,
+                            decoration: const InputDecoration(
+                              label: Text('Numero'),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Expanded(
+                          child: TextFormField(
+                            readOnly: !enableForm,
+                            controller: complementEC,
+                            decoration: const InputDecoration(
+                              label: Text('Complemento'),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(
+                          width: 16,
+                        ),
+                        Expanded(
+                          child: TextFormField(
+                            readOnly: !enableForm,
+                            controller: stateEC,
+                            validator:
+                                Validatorless.required("Estado obrigatório"),
+                            decoration: const InputDecoration(
+                              label: Text('Estado'),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Expanded(
+                          child: TextFormField(
+                            readOnly: !enableForm,
+                            controller: cityEC,
+                            validator:
+                                Validatorless.required("Cidade obrigatório"),
+                            decoration: const InputDecoration(
+                              label: Text('Cidade'),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(
+                          width: 16,
+                        ),
+                        Expanded(
+                          child: TextFormField(
+                            readOnly: !enableForm,
+                            controller: districtEC,
+                            validator:
+                                Validatorless.required("Bairro obrigatório"),
+                            decoration: const InputDecoration(
+                              label: Text('Bairro'),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    TextFormField(
+                      readOnly: !enableForm,
+                      controller: guardianEC,
+                      decoration: const InputDecoration(
+                        label: Text('Responsavel'),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    TextFormField(
+                      readOnly: !enableForm,
+                      controller: guardianIdentificationNumberEC,
+                      inputFormatters: [
+                        FilteringTextInputFormatter.digitsOnly,
+                        CpfInputFormatter()
+                      ],
+                      decoration: const InputDecoration(
+                        label: Text('Documento de Identificação'),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 32,
+                    ),
+                    Visibility(
+                      visible: !enableForm,
+                      replacement: SizedBox(
+                        width: double.infinity,
+                        height: 48,
+                        child: ElevatedButton(
+                          onPressed: () {},
+                          child: Visibility(
+                            visible: !patientFound,
+                            replacement: const Text("SALVAR E CONTINUAR"),
+                            child: const Text("CADASTRAR"),
                           ),
                         ),
                       ),
-                      const SizedBox(
-                        width: 16,
-                      ),
-                      Flexible(
-                        child: TextFormField(
-                          validator:
-                              Validatorless.required("Numero obrigatório"),
-                          controller: numberEC,
-                          decoration: const InputDecoration(
-                            label: Text('Numero'),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: SizedBox(
+                              height: 48,
+                              child: OutlinedButton(
+                                onPressed: () {
+                                  setState(() {
+                                    enableForm = true;
+                                  });
+                                },
+                                child: const Text("Editar"),
+                              ),
+                            ),
                           ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 16,
-                  ),
-                  Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Expanded(
-                        child: TextFormField(
-                          controller: complementEC,
-                          decoration: const InputDecoration(
-                            label: Text('Complemento'),
+                          const SizedBox(
+                            width: 17,
                           ),
-                        ),
+                          Expanded(
+                            child: SizedBox(
+                              height: 48,
+                              child: ElevatedButton(
+                                onPressed: () {},
+                                child: const Text("Continuar"),
+                              ),
+                            ),
+                          )
+                        ],
                       ),
-                      const SizedBox(
-                        width: 16,
-                      ),
-                      Expanded(
-                        child: TextFormField(
-                          controller: stateEC,
-                          validator:
-                              Validatorless.required("Estado obrigatório"),
-                          decoration: const InputDecoration(
-                            label: Text('Estado'),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 16,
-                  ),
-                  Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Expanded(
-                        child: TextFormField(
-                          controller: cityEC,
-                          validator:
-                              Validatorless.required("Cidade obrigatório"),
-                          decoration: const InputDecoration(
-                            label: Text('Cidade'),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(
-                        width: 16,
-                      ),
-                      Expanded(
-                        child: TextFormField(
-                          controller: districtEC,
-                          validator:
-                              Validatorless.required("Bairro obrigatório"),
-                          decoration: const InputDecoration(
-                            label: Text('Bairro'),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 16,
-                  ),
-                  TextFormField(
-                    controller: guardianEC,
-                    decoration: const InputDecoration(
-                      label: Text('Responsavel'),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 16,
-                  ),
-                  TextFormField(
-                    controller: guardianIdentificationNumberEC,
-                    inputFormatters: [
-                      FilteringTextInputFormatter.digitsOnly,
-                      CpfInputFormatter()
-                    ],
-                    decoration: const InputDecoration(
-                      label: Text('Documento de Identificação'),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 32,
-                  ),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: SizedBox(
-                            height: 48,
-                            child: OutlinedButton(
-                              onPressed: () {},
-                              child: const Text("Editar"),
-                            )),
-                      ),
-                      const SizedBox(
-                        width: 17,
-                      ),
-                      Expanded(
-                        child: SizedBox(
-                            height: 48,
-                            child: ElevatedButton(
-                              onPressed: () {},
-                              child: const Text("Continuar"),
-                            )),
-                      )
-                    ],
-                  )
-                ],
+                    )
+                  ],
+                ),
               ),
             ),
           ),

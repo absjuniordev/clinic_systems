@@ -37,99 +37,106 @@ class _FindPatientPageState extends State<FindPatientPage>
   @override
   Widget build(BuildContext context) {
     final sizeOf = MediaQuery.sizeOf(context);
-    return Scaffold(
-        appBar: LabClinicasSelfServiceAppBar(),
-        body: LayoutBuilder(
-          builder: (_, constrains) {
-            return SingleChildScrollView(
-              child: Container(
-                constraints: BoxConstraints(minHeight: sizeOf.height),
-                decoration: const BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage('assets/images/background_login.png'),
-                    fit: BoxFit.cover,
+    return PopScope(
+      canPop: false,
+      onPopInvoked: (didPop) {
+        documentEC.text = '';
+      },
+      child: Scaffold(
+          appBar: LabClinicasSelfServiceAppBar(),
+          body: LayoutBuilder(
+            builder: (_, constrains) {
+              return SingleChildScrollView(
+                child: Container(
+                  constraints: BoxConstraints(minHeight: sizeOf.height),
+                  decoration: const BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage('assets/images/background_login.png'),
+                      fit: BoxFit.cover,
+                    ),
                   ),
-                ),
-                child: Center(
-                  child: Container(
-                    padding: const EdgeInsets.all(40),
-                    width: MediaQuery.sizeOf(context).width * .8,
-                    decoration: BoxDecoration(
+                  child: Center(
+                    child: Container(
+                      padding: const EdgeInsets.all(40),
+                      width: MediaQuery.sizeOf(context).width * .8,
+                      decoration: BoxDecoration(
                         color: Colors.white,
-                        borderRadius: BorderRadius.circular(16)),
-                    child: Form(
-                      key: formKey,
-                      child: Column(
-                        children: [
-                          Image.asset('assets/images/logo_vertical.png'),
-                          const SizedBox(
-                            height: 48,
-                          ),
-                          TextFormField(
-                            controller: documentEC,
-                            inputFormatters: [
-                              FilteringTextInputFormatter.digitsOnly,
-                              CpfInputFormatter()
-                            ],
-                            validator:
-                                Validatorless.required("CPF Obrigatorio"),
-                            decoration: const InputDecoration(
-                              label: Text("Digite o CPF do Paciente"),
+                        borderRadius: BorderRadius.circular(16),
+                      ),
+                      child: Form(
+                        key: formKey,
+                        child: Column(
+                          children: [
+                            Image.asset('assets/images/logo_vertical.png'),
+                            const SizedBox(
+                              height: 48,
                             ),
-                          ),
-                          const SizedBox(
-                            height: 24,
-                          ),
-                          Row(
-                            children: [
-                              const Text(
-                                "Não sabe o CPF do Paciente",
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  color: LabClinicasTheme.blueColor,
-                                  fontWeight: FontWeight.w400,
-                                ),
+                            TextFormField(
+                              controller: documentEC,
+                              inputFormatters: [
+                                FilteringTextInputFormatter.digitsOnly,
+                                CpfInputFormatter()
+                              ],
+                              validator:
+                                  Validatorless.required("CPF Obrigatorio"),
+                              decoration: const InputDecoration(
+                                label: Text("Digite o CPF do Paciente"),
                               ),
-                              TextButton(
-                                onPressed: () {
-                                  controller.continueWithoutDocument();
-                                },
-                                child: const Text(
-                                  "Clique aqui",
+                            ),
+                            const SizedBox(
+                              height: 24,
+                            ),
+                            Row(
+                              children: [
+                                const Text(
+                                  "Não sabe o CPF do Paciente",
                                   style: TextStyle(
                                     fontSize: 14,
-                                    color: LabClinicasTheme.orangeColor,
-                                    fontWeight: FontWeight.bold,
+                                    color: LabClinicasTheme.blueColor,
+                                    fontWeight: FontWeight.w400,
                                   ),
                                 ),
-                              ),
-                              const SizedBox(
-                                height: 24,
-                              ),
-                            ],
-                          ),
-                          SizedBox(
-                            width: sizeOf.width * .8,
-                            child: ElevatedButton(
-                              onPressed: () {
-                                final valid =
-                                    formKey.currentState?.validate() ?? false;
-                                if (valid) {
-                                  controller
-                                      .findPatientByDocument(documentEC.text);
-                                }
-                              },
-                              child: const Text("CONTINUAR"),
+                                TextButton(
+                                  onPressed: () {
+                                    controller.continueWithoutDocument();
+                                  },
+                                  child: const Text(
+                                    "Clique aqui",
+                                    style: TextStyle(
+                                      fontSize: 14,
+                                      color: LabClinicasTheme.orangeColor,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(
+                                  height: 24,
+                                ),
+                              ],
                             ),
-                          )
-                        ],
+                            SizedBox(
+                              width: sizeOf.width * .8,
+                              child: ElevatedButton(
+                                onPressed: () {
+                                  final valid =
+                                      formKey.currentState?.validate() ?? false;
+                                  if (valid) {
+                                    controller
+                                        .findPatientByDocument(documentEC.text);
+                                  }
+                                },
+                                child: const Text("CONTINUAR"),
+                              ),
+                            )
+                          ],
+                        ),
                       ),
                     ),
                   ),
                 ),
-              ),
-            );
-          },
-        ));
+              );
+            },
+          )),
+    );
   }
 }
