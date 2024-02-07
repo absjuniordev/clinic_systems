@@ -10,14 +10,15 @@ class FindPatientController with MessageStateMixin {
 
   final PatientRepository _patientRepository;
   final _patientNotFound = ValueSignal<bool?>(null);
-  PatientModel? get patient => _patient();
-
-  bool? get patientNotFound => _patientNotFound();
   final _patient = ValueSignal<PatientModel?>(null);
+
+  PatientModel? get patient => _patient();
+  bool? get patientNotFound => _patientNotFound();
 
   Future<void> findPatientByDocument(String document) async {
     final patientResult =
         await _patientRepository.findPatientByDocument(document);
+
     bool patientNotFound;
     PatientModel? patient;
 
@@ -32,6 +33,7 @@ class FindPatientController with MessageStateMixin {
         showError("Error ao bsucar paciente");
         return;
     }
+
     batch(() {
       _patient.forceUpdate(patient);
       _patientNotFound.forceUpdate(patientNotFound);

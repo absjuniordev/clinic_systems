@@ -1,6 +1,5 @@
 import 'package:fe_lab_clinicas_self_service/src/model/patient_address_model.dart';
 import 'package:json_annotation/json_annotation.dart';
-
 part 'patient_model.g.dart';
 
 @JsonSerializable()
@@ -25,6 +24,7 @@ class PatientModel {
   final PatientAddressModel address;
   @JsonKey(name: 'guardian', defaultValue: '')
   final String guardian;
+  @JsonKey(name: 'guardian_identification_number')
   final String guardianIdentificationNumber;
 
   factory PatientModel.fromJson(Map<String, dynamic> json) =>
