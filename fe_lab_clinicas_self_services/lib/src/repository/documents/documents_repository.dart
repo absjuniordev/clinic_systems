@@ -4,5 +4,5 @@ import 'package:fe_lab_clinicas_core/fe_lab_clinicas_core.dart';
 
 abstract interface class DocumentsRepository {
   Future<Either<RepositoryException, String>> uploadImage(
-      Uint8List fila, String fileName);
+      Uint8List file, String fileName);
 }

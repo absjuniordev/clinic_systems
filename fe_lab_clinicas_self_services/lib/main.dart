@@ -43,7 +43,7 @@ class LabClinicasSelfServiceApp extends StatelessWidget {
         HomeModule(),
         SelfServiceModule(),
       ],
-      didStar: () {
+      didStart: () {
         FlutterGetItBindingRegister.registerPermanentBinding('CAMERAS', [
           Bind.lazySingleton((i) => _cameras),
         ]);

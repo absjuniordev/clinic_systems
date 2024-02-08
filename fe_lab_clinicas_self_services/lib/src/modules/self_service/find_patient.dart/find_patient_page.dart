@@ -48,7 +48,7 @@ class _FindPatientPageState extends State<FindPatientPage>
             builder: (_, constrains) {
               return SingleChildScrollView(
                 child: Container(
-                  constraints: BoxConstraints(minHeight: sizeOf.height),
+                  constraints: BoxConstraints(minHeight: constrains.maxHeight),
                   decoration: const BoxDecoration(
                     image: DecorationImage(
                       image: AssetImage('assets/images/background_login.png'),
