@@ -39,91 +39,95 @@ class _LoginPageState extends State<LoginPage> with MessageViewMixin {
   Widget build(BuildContext context) {
     final sizeOf = MediaQuery.sizeOf(context);
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Container(
-          constraints: BoxConstraints(minHeight: sizeOf.height),
-          decoration: const BoxDecoration(
-            image: DecorationImage(
-                image: AssetImage('assets/images/background_login.png'),
-                fit: BoxFit.cover),
-          ),
-          child: Center(
+      body: LayoutBuilder(
+        builder: (_, constraints) {
+          return SingleChildScrollView(
             child: Container(
-              padding: const EdgeInsets.all(40),
-              constraints: BoxConstraints(maxWidth: sizeOf.width * 0.8),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(16),
+              constraints: BoxConstraints(minHeight: constraints.maxHeight),
+              decoration: const BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage('assets/images/background_login.png'),
+                    fit: BoxFit.cover),
               ),
-              child: Form(
-                key: formKey,
-                child: Column(
-                  children: [
-                    const Text(
-                      "Login",
-                      style: LabClinicasTheme.titleStyle,
-                    ),
-                    const SizedBox(
-                      height: 32,
-                    ),
-                    TextFormField(
-                      controller: emailEC,
-                      validator: Validatorless.multiple([
-                        Validatorless.required("Email obrigatorio"),
-                        Validatorless.email("Email invalido")
-                      ]),
-                      decoration: const InputDecoration(
-                        label: Text("Email"),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 24,
-                    ),
-                    Watch(
-                      (_) {
-                        return TextFormField(
-                          obscureText: controller.obscurePassword,
-                          controller: passwordEC,
-                          validator:
-                              Validatorless.required("Senha obrigatorio"),
-                          decoration: InputDecoration(
-                            suffixIcon: IconButton(
-                              onPressed: () {
-                                controller.passwordToggle();
-                              },
-                              icon: controller.obscurePassword
-                                  ? const Icon(Icons.visibility)
-                                  : const Icon(Icons.visibility_off),
-                            ),
-                            label: const Text("Password"),
+              child: Center(
+                child: Container(
+                  padding: const EdgeInsets.all(40),
+                  constraints: BoxConstraints(maxWidth: sizeOf.width * 0.8),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  child: Form(
+                    key: formKey,
+                    child: Column(
+                      children: [
+                        const Text(
+                          "Login",
+                          style: LabClinicasTheme.titleStyle,
+                        ),
+                        const SizedBox(
+                          height: 32,
+                        ),
+                        TextFormField(
+                          controller: emailEC,
+                          validator: Validatorless.multiple([
+                            Validatorless.required("Email obrigatorio"),
+                            Validatorless.email("Email invalido")
+                          ]),
+                          decoration: const InputDecoration(
+                            label: Text("Email"),
                           ),
-                        );
-                      },
-                    ),
-                    const SizedBox(
-                      height: 32,
-                    ),
-                    SizedBox(
-                      height: 48,
-                      width: sizeOf.width * .8,
-                      child: ElevatedButton(
-                        onPressed: () {
-                          final valid =
-                              formKey.currentState?.validate() ?? false;
+                        ),
+                        const SizedBox(
+                          height: 24,
+                        ),
+                        Watch(
+                          (_) {
+                            return TextFormField(
+                              obscureText: controller.obscurePassword,
+                              controller: passwordEC,
+                              validator:
+                                  Validatorless.required("Senha obrigatorio"),
+                              decoration: InputDecoration(
+                                suffixIcon: IconButton(
+                                  onPressed: () {
+                                    controller.passwordToggle();
+                                  },
+                                  icon: controller.obscurePassword
+                                      ? const Icon(Icons.visibility)
+                                      : const Icon(Icons.visibility_off),
+                                ),
+                                label: const Text("Password"),
+                              ),
+                            );
+                          },
+                        ),
+                        const SizedBox(
+                          height: 32,
+                        ),
+                        SizedBox(
+                          height: 48,
+                          width: sizeOf.width * .8,
+                          child: ElevatedButton(
+                            onPressed: () {
+                              final valid =
+                                  formKey.currentState?.validate() ?? false;
 
-                          if (valid) {
-                            controller.login(emailEC.text, passwordEC.text);
-                          }
-                        },
-                        child: const Text("ENTRAR"),
-                      ),
-                    )
-                  ],
+                              if (valid) {
+                                controller.login(emailEC.text, passwordEC.text);
+                              }
+                            },
+                            child: const Text("ENTRAR"),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
                 ),
               ),
             ),
-          ),
-        ),
+          );
+        },
       ),
     );
   }
