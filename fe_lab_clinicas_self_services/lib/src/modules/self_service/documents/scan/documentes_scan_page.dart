@@ -1,4 +1,5 @@
 import 'package:camera/camera.dart';
+import 'package:dotted_border/dotted_border.dart';
 import 'package:fe_lab_clinicas_core/fe_lab_clinicas_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_getit/flutter_getit.dart';
@@ -53,7 +54,7 @@ class _DocumentsScanPageState extends State<DocumentsScanPage> {
                   style: LabClinicasTheme.titleSmallStyle,
                 ),
                 const SizedBox(
-                  height: 32,
+                  height: 15,
                 ),
                 const Text(
                   "POSICIONE O DOCUMENTO DENTRO DO QUADRADO ABAIXO E APERTE O BOTÃO PARA TIRAR A FOTO",
@@ -80,14 +81,39 @@ class _DocumentsScanPageState extends State<DocumentsScanPage> {
                         );
                       case AsyncSnapshot(connectionState: ConnectionState.done):
                         if (cameraController.value.isInitialized) {
-                          return CameraPreview(cameraController);
+                          return ClipRRect(
+                            borderRadius: BorderRadius.circular(16),
+                            child: SizedBox(
+                              width: sizeOf.width * 0.45,
+                              child: CameraPreview(
+                                cameraController,
+                                child: DottedBorder(
+                                  dashPattern: const [1, 10, 1, 3],
+                                  borderType: BorderType.RRect,
+                                  radius: const Radius.circular(16),
+                                  color: LabClinicasTheme.orangeColor,
+                                  strokeWidth: 4,
+                                  strokeCap: StrokeCap.square,
+                                  child: const SizedBox.expand(),
+                                ),
+                              ),
+                            ),
+                          );
                         }
                     }
                     return const Center(
                       child: Text('Error ao carregar Camera'),
                     );
                   },
-                )
+                ),
+                const SizedBox(
+                  height: 24,
+                ),
+                SizedBox(
+                    width: sizeOf.width * 8,
+                    height: 48,
+                    child: ElevatedButton(
+                        onPressed: () {}, child: const Text("TIRAR FOTO")))
               ],
             ),
           ),
