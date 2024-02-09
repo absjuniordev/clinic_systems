@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:developer';
 import 'package:fe_lab_clinicas_core/fe_lab_clinicas_core.dart';
 import 'package:fe_lab_clinicas_self_adm/src/bindings/lab_clinicas_applications_bindings.dart';
+import 'package:fe_lab_clinicas_self_adm/src/core/pages/login/login_router.dart';
 import 'package:fe_lab_clinicas_self_adm/src/core/pages/splash/splash_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_getit/flutter_getit.dart';
@@ -28,6 +29,7 @@ class LabClinicasAdm extends StatelessWidget {
       pagesBuilder: [
         FlutterGetItPageBuilder(page: (_) => const SplashPage(), path: '/')
       ],
+      pages: const [LoginRouter()],
     );
   }
 }
