@@ -3,9 +3,10 @@ import 'package:dio/dio.dart';
 import 'package:fe_lab_clinicas_core/fe_lab_clinicas_core.dart';
 import 'attendant_desk_assignment_repository.dart';
 
-class AttendantDeskAssignmentImpl implements AttendantDeskAssignmentRepository {
+class AttendantDeskAssignmentRepositoryImpl
+    implements AttendantDeskAssignmentRepository {
   RestClient restClient;
-  AttendantDeskAssignmentImpl({
+  AttendantDeskAssignmentRepositoryImpl({
     required this.restClient,
   });
   @override
@@ -57,5 +58,19 @@ class AttendantDeskAssignmentImpl implements AttendantDeskAssignmentRepository {
       );
     }
     return null;
+  }
+
+  @override
+  Future<Either<RepositoryException, int>> getDeskAssignment() async {
+    try {
+      final Response(data: List(first: data)) = await restClient.auth
+          .get('/attendantDeskAssignment', queryParameters: {
+        'user_id': '#userAuthRef',
+      });
+      return Right(data['desk_number']);
+    } on DioException catch (e, s) {
+      log('Erro ao buscar numero do guichê', error: e, stackTrace: s);
+      return Left(RepositoryException());
+    }
   }
 }
