@@ -24,6 +24,3 @@ class PreCheckinController with MessageStateMixin {
     }
   }
 }
-
-
-///aula 14
