@@ -24,7 +24,9 @@ class _DocumentsPageState extends State<DocumentsPage> with MessageViewMixin {
   @override
   Widget build(BuildContext context) {
     final sizeOf = MediaQuery.sizeOf(context);
+
     final documents = selfServiceController.model.documents;
+
     final totalHealthInsuranceCard =
         documents?[DocumentType.healthInsuranceCard]?.length ?? 0;
     final totalMedicalOrder =
