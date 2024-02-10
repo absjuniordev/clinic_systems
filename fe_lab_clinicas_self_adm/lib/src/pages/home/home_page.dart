@@ -3,6 +3,7 @@ import 'package:fe_lab_clinicas_self_adm/src/pages/home/home_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_getit/flutter_getit.dart';
+import 'package:signals_flutter/signals_flutter.dart';
 import 'package:validatorless/validatorless.dart';
 
 class HomePage extends StatefulWidget {
@@ -19,6 +20,13 @@ class _HomePageState extends State<HomePage> with MessageViewMixin {
   @override
   void initState() {
     messageListener(controller);
+    effect(() => {
+          if (controller.iformationForm != null)
+            {
+              Navigator.of(context).pushReplacementNamed('/pre-checkin',
+                  arguments: controller.iformationForm)
+            }
+        });
     super.initState();
   }
 

@@ -14,7 +14,7 @@ class PatientInformationFormRepositoryImpl
 
   RestClient restClient;
   @override
-  Future<Either<RepositoryException, PatienteInformationFormModel?>>
+  Future<Either<RepositoryException, PatientInformationFormModel?>>
       callNextToCheckcin() async {
     final Response(:List data) = await restClient.auth
         .get('/patientInformationForm', queryParameters: {
@@ -35,7 +35,7 @@ class PatientInformationFormRepositoryImpl
       case Right():
         formData['status'] = PatientInformationFormStatus.checkIn.id;
         formData['patient'] = await _getPatient(formData['patient_id']);
-        return Right(PatienteInformationFormModel.fromJson(formData));
+        return Right(PatientInformationFormModel.fromJson(formData));
     }
   }
 
@@ -53,7 +53,7 @@ class PatientInformationFormRepositoryImpl
   }
 
   Future<Map<String, dynamic>> _getPatient(String id) async {
-    final Response(:data) = await restClient.auth.get('/patient/$id');
+    final Response(:data) = await restClient.auth.get('/patients/$id');
     return data;
   }
 }

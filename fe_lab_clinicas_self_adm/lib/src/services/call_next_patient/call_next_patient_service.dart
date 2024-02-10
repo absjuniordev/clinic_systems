@@ -19,7 +19,7 @@ class CallNextPatientService {
   final AttendantDeskAssignmentRepository attendantDeskAssignmentRepository;
   final PainelRepository painelRepository;
 
-  Future<Either<RepositoryException, PatienteInformationFormModel?>>
+  Future<Either<RepositoryException, PatientInformationFormModel?>>
       execute() async {
     final result = await patientInformationFormRepository.callNextToCheckcin();
 
@@ -33,8 +33,8 @@ class CallNextPatientService {
     }
   }
 
-  Future<Either<RepositoryException, PatienteInformationFormModel>> updatePanel(
-      PatienteInformationFormModel form) async {
+  Future<Either<RepositoryException, PatientInformationFormModel>> updatePanel(
+      PatientInformationFormModel form) async {
     final resultDesk =
         await attendantDeskAssignmentRepository.getDeskAssignment();
     switch (resultDesk) {

@@ -16,8 +16,8 @@ enum PatientInformationFormStatus {
 }
 
 @JsonSerializable()
-class PatienteInformationFormModel {
-  PatienteInformationFormModel({
+class PatientInformationFormModel {
+  PatientInformationFormModel({
     required this.id,
     required this.patient,
     required this.healthInsuranceCard,
@@ -38,8 +38,8 @@ class PatienteInformationFormModel {
   final DateTime dateCreated;
   final PatientInformationFormStatus status;
 
-  factory PatienteInformationFormModel.fromJson(Map<String, dynamic> json) =>
-      _$PatienteInformationFormModelFromJson(json);
+  factory PatientInformationFormModel.fromJson(Map<String, dynamic> json) =>
+      _$PatientInformationFormModelFromJson(json);
 
-  Map<String, dynamic> toJson() => _$PatienteInformationFormModelToJson(this);
+  Map<String, dynamic> toJson() => _$PatientInformationFormModelToJson(this);
 }
