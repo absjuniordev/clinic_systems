@@ -20,6 +20,12 @@ class _CheckinPageState extends State<CheckinPage> with MessageViewMixin {
   @override
   void initState() {
     messageListener(controller);
+    effect(() => {
+          if (controller.endProcess())
+            {
+              Navigator.of(context).pushReplacementNamed('/end-checkin'),
+            }
+        });
     super.initState();
   }
 
@@ -155,23 +161,21 @@ class _CheckinPageState extends State<CheckinPage> with MessageViewMixin {
                 const SizedBox(
                   height: 24,
                 ),
-                const Row(
+                Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     ChekcinImageLink(
                       label: "Carteirinha",
+                      image: healthInsuranceCard,
                     ),
                     Column(
                       children: [
-                        ChekcinImageLink(
-                          label: "Carteirinha",
-                        ),
-                        ChekcinImageLink(
-                          label: "Carteirinha",
-                        ),
-                        ChekcinImageLink(
-                          label: "Carteirinha",
-                        ),
+                        for (final (index, medicalOrders)
+                            in medicalOrders.indexed)
+                          ChekcinImageLink(
+                            label: "Pedido Médico ${index + 1}",
+                            image: medicalOrders,
+                          ),
                       ],
                     )
                   ],
@@ -184,7 +188,7 @@ class _CheckinPageState extends State<CheckinPage> with MessageViewMixin {
                   height: 48,
                   child: ElevatedButton(
                     onPressed: () {
-                      controller.endProcess();
+                      controller.endCheckin();
                     },
                     child: const Text('ATENDER'),
                   ),
