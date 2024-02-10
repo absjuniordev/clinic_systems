@@ -26,8 +26,12 @@ class _CheckinPageState extends State<CheckinPage> with MessageViewMixin {
   @override
   Widget build(BuildContext context) {
     var sizeOf = MediaQuery.sizeOf(context);
-    final PatientInformationFormModel(:password, :patient) =
-        controller.informationForm.watch(context)!;
+    final PatientInformationFormModel(
+      :password,
+      :patient,
+      :medicalOrders,
+      :healthInsuranceCard,
+    ) = controller.informationForm.watch(context)!;
 
     return Scaffold(
       appBar: LabClinicasAppBar(),
@@ -180,8 +184,7 @@ class _CheckinPageState extends State<CheckinPage> with MessageViewMixin {
                   height: 48,
                   child: ElevatedButton(
                     onPressed: () {
-                      Navigator.of(context).pushReplacementNamed('/chekin',
-                          arguments: controller.informationForm);
+                      controller.endProcess();
                     },
                     child: const Text('ATENDER'),
                   ),
