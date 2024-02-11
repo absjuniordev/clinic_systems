@@ -47,7 +47,7 @@ class PatientRepositoryImpl implements PatientRepository {
     try {
       final Response(:data) = await restClient.auth.post('/patients/', data: {
         'name': patient.name,
-        'email': patient.emmail,
+        'email': patient.email,
         'phone_number': patient.phoneNumber,
         'document': patient.document,
         'address': {

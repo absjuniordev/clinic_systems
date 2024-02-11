@@ -13,7 +13,7 @@ typedef RegisterPatientAddressModel = ({
 
 typedef RegisterPatientModel = ({
   String name,
-  String emmail,
+  String email,
   String phoneNumber,
   String document,
   RegisterPatientAddressModel address,
@@ -24,7 +24,7 @@ typedef RegisterPatientModel = ({
 abstract interface class PatientRepository {
   Future<Either<RepositoryException, PatientModel?>> findPatientByDocument(
       String document);
-  Future<Either<RepositoryException, Unit>> update(PatientModel patient);
   Future<Either<RepositoryException, PatientModel>> register(
       RegisterPatientModel patient);
+  Future<Either<RepositoryException, Unit>> update(PatientModel patient);
 }

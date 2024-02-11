@@ -26,9 +26,9 @@ class _FindPatientPageState extends State<FindPatientPage>
   void initState() {
     messageListener(controller);
     effect(() {
-      final FindPatientController(:patient, :patientNotFound) = controller;
-      if (patient != null || patientNotFound != null) {
-        Injector.get<SelfServiceController>().goToFormPatient(patient);
+      final FindPatientController(:patientFind, :patientNotFound) = controller;
+      if (patientFind != null || patientNotFound != null) {
+        Injector.get<SelfServiceController>().goToFormPatient(patientFind);
       }
     });
     super.initState();

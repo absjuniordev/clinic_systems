@@ -76,7 +76,7 @@ mixin PatientFormController on State<PatientPage> {
   RegisterPatientModel createPatientRegister() {
     return (
       name: nameEC.text,
-      emmail: emailEC.text,
+      email: emailEC.text,
       phoneNumber: phoneEC.text,
       document: documentEC.text,
       address: (

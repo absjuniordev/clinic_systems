@@ -22,7 +22,7 @@ class _PatientPageState extends State<PatientPage>
     with PatientFormController, MessageViewMixin {
   final formKey = GlobalKey<FormState>();
   final selfServiceController = Injector.get<SelfServiceController>();
-  final PatientController controller = Injector.get<PatientController>();
+  final controller = Injector.get<PatientController>();
 
   late bool patientFound;
   late bool enableForm;
@@ -36,6 +36,9 @@ class _PatientPageState extends State<PatientPage>
 
     initializeForm(patient);
     effect(() {
+      if (controller.saveOk) {
+        Navigator.of(context).pop();
+      }
       if (controller.nextStep) {
         selfServiceController.updatePatientAndGoDocument(controller.patient);
       }
@@ -316,15 +319,17 @@ class _PatientPageState extends State<PatientPage>
                         width: double.infinity,
                         height: 48,
                         child: ElevatedButton(
-                          onPressed: () {
+                          onPressed: () async {
                             final valid =
                                 formKey.currentState?.validate() ?? false;
+
                             if (valid) {
-                              if (patientFound) {
+                              if (patientFound && enableForm) {
                                 controller.updateAndNext(updatePatient(
                                     selfServiceController.model.patient!));
                               } else {
-                                controller.saveAndNext(createPatientRegister());
+                                await controller
+                                    .saveAndNext(createPatientRegister());
                               }
                             }
                           },
