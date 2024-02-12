@@ -2,7 +2,7 @@
 
 Este é o repositório do projeto realizado durante o Flutter Experience da Academia do Flutter, ministrado pelo Rodrigo Rahman.
 
-## onfigurações
+##Configurações
 
 Antes de começar, é necessário configurar o ambiente de acordo com as seguintes instruções:
 
@@ -40,6 +40,7 @@ A lista de pacotes utilizados neste projeto inclui:
 - dotted_border: ^2.1.0
 - validatorless: ^1.2.3
 - signals_flutter: ^3.0.0
+
 - dio: ^5.4.0
 - shared_preferences: ^2.2.2
 - json_annotation: ^4.8.1
@@ -61,6 +62,6 @@ Se você deseja contribuir com o projeto, siga estas etapas:
 
 Por favor, certifique-se de descrever claramente as mudanças propostas e o motivo delas.
 
-## Licença
+##Licença
 
 Este projeto está licenciado sob a [Licença MIT](https://opensource.org/licenses/MIT).
