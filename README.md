@@ -1,8 +1,8 @@
-#Projeto Flutter Experience - Academia do Flutter
+# Projeto Flutter Experience - Academia do Flutter
 
 Este é o repositório do projeto realizado durante o Flutter Experience da Academia do Flutter, ministrado pelo Rodrigo Rahman.
 
-##Configurações
+## Configurações
 
 Antes de começar, é necessário configurar o ambiente de acordo com as seguintes instruções:
 
@@ -28,7 +28,7 @@ Antes de começar, é necessário configurar o ambiente de acordo com as seguint
    - Após as configurações anteriores, inicie as aplicações conforme necessário.
    - Certifique-se de que as configurações básicas para operação do Flutter estão prontas, incluindo Flutter Desktop, Mobile e Web.
 
-##Pacotes Utilizados
+## Pacotes Utilizados
 
 A lista de pacotes utilizados neste projeto inclui:
 
@@ -50,7 +50,7 @@ A lista de pacotes utilizados neste projeto inclui:
 - json_serializable: ^6.7.1
 - build_runner: ^2.4.8
 
-##Contribuição
+## Contribuição
 
 Se você deseja contribuir com o projeto, siga estas etapas:
 
@@ -62,6 +62,3 @@ Se você deseja contribuir com o projeto, siga estas etapas:
 
 Por favor, certifique-se de descrever claramente as mudanças propostas e o motivo delas.
 
-##Licença
-
-Este projeto está licenciado sob a [Licença MIT](https://opensource.org/licenses/MIT).
