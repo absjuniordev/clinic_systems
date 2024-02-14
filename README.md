@@ -19,12 +19,24 @@ Antes de começar, é necessário configurar o ambiente de acordo com as seguint
      }
      ```
      Substitua `SEUIP` pelo IP da sua máquina.
+     
+3.No launch.json, adcione o cnteudo do "args". Esse trecho deve se aplicado para todas aplicaçoes:
+ 
+         {
+            "name": "NOME_DO_ARQUIVO (DEV)",
+            "request": "launch",
+            "type": "dart",
+            "args": [
+                "--dart-define-from-file",
+                ".config/env.json",
+            ]
+        },
 
-3.Inicialização do banco de dados:
+4.Inicialização do banco de dados:
    - Navegue até a pasta `API`, preferencialmente utilizando o PowerShell.
    - Execute o comando `jrs run` para iniciar o banco de dados.
 
-4.Inicialização das aplicações:
+5.Inicialização das aplicações:
    - Após as configurações anteriores, inicie as aplicações conforme necessário.
    - Certifique-se de que as configurações básicas para operação do Flutter estão prontas, incluindo Flutter Desktop, Mobile e Web.
 
