@@ -1,4 +1,5 @@
 import 'package:fe_lab_clinicas_core/fe_lab_clinicas_core.dart';
+import 'package:fe_lab_clinicas_panel/src/pages/painel/widgets/password_title.dart';
 import 'package:flutter/material.dart';
 
 import 'widgets/painel_principal_widgets.dart';
@@ -44,6 +45,53 @@ class PainelPage extends StatelessWidget {
                 ),
               ],
             ),
+            const SizedBox(
+              height: 40,
+            ),
+            const Divider(
+              color: LabClinicasTheme.orangeColor,
+            ),
+            const SizedBox(
+              height: 30,
+            ),
+            const Text(
+              'Últimos Chamados',
+              style: TextStyle(
+                fontSize: 22,
+                fontWeight: FontWeight.bold,
+                color: LabClinicasTheme.orangeColor,
+              ),
+            ),
+            const SizedBox(
+              height: 16,
+            ),
+            const Wrap(
+              runAlignment: WrapAlignment.center,
+              spacing: 10,
+              runSpacing: 10,
+              children: [
+                PasswordTitle(
+                  password: 'PF0909',
+                  label: 'Guichê 03',
+                ),
+                PasswordTitle(
+                  password: 'PF0909',
+                  label: 'Guichê 03',
+                ),
+                PasswordTitle(
+                  password: 'PF0909',
+                  label: 'Guichê 03',
+                ),
+                PasswordTitle(
+                  password: 'PF0909',
+                  label: 'Guichê 03',
+                ),
+                PasswordTitle(
+                  password: 'PF0909',
+                  label: 'Guichê 03',
+                ),
+              ],
+            )
           ],
         ),
       ),
