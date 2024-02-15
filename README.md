@@ -52,7 +52,7 @@ A lista de pacotes utilizados neste projeto inclui:
 - dotted_border: ^2.1.0
 - validatorless: ^1.2.3
 - signals_flutter: ^3.0.0
-
+- web_socket_channel: ^2.4.0
 - dio: ^5.4.0
 - shared_preferences: ^2.2.2
 - json_annotation: ^4.8.1
