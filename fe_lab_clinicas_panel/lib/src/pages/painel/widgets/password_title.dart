@@ -2,8 +2,9 @@ import 'package:fe_lab_clinicas_core/fe_lab_clinicas_core.dart';
 import 'package:flutter/material.dart';
 
 class PasswordTitle extends StatelessWidget {
-  const PasswordTitle({super.key, required this.label, required this.password});
-  final String label;
+  const PasswordTitle(
+      {super.key, required this.deskNumber, required this.password});
+  final String deskNumber;
   final String password;
 
   @override
@@ -28,7 +29,7 @@ class PasswordTitle extends StatelessWidget {
             ),
           ),
           Text(
-            label,
+            deskNumber,
             style: const TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,
