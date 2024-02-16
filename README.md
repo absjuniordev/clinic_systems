@@ -1,6 +1,12 @@
-# Projeto Flutter Experience - Academia do Flutter
+# Flutter Experience - Academia do Flutter
 
 Este é o repositório do projeto realizado durante o Flutter Experience da Academia do Flutter, ministrado pelo Rodrigo Rahman.
+
+Este projeto envolve aplicações para Android, Web e Desktop
+
+* Android: Aplicação destinada ao Paciente;
+* Web: Aplicação responsavel por mostrar as senhas;
+* Desktop: Aplicação para triagem do atendimento.
 
 ## Configurações
 
@@ -39,6 +45,8 @@ Antes de começar, é necessário configurar o ambiente de acordo com as seguint
 5.Inicialização das aplicações:
    - Após as configurações anteriores, inicie as aplicações conforme necessário.
    - Certifique-se de que as configurações básicas para operação do Flutter estão prontas, incluindo Flutter Desktop, Mobile e Web.
+
+6.Defina a hora e data do seu emulador Android (caso utilize) para que sejam iguais ao do computador.    
 
 ## Pacotes Utilizados
 
